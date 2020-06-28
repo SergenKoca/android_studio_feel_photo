@@ -1,0 +1,18 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Arama, eylem düğmesi olarak görülebilir -->
+   <!-- <item android:id="@+id/action_arama"
+        android:icon="@drawable/upload"
+        android:title="Sil bunu"
+        app:showAsAction="ifRoom" />-->
+    <!-- Ayarlar, daima taşan eylemler bölümünde durabilir -->
+    <item android:id="@+id/action_profile"
+        android:title="Profilim"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_settings"
+        android:title="Ayarlar"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_log_out"
+        android:title="Çıkış Yap"
+        app:showAsAction="never" />
+</menu>

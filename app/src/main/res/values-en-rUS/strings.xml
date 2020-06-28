@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FeelPhoto</string>
+    <string name="signUp">Sign Up</string>
+    <string name="signIn">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password (min 6 characters)</string>
+    <string name="username">Username</string>
+    <string name="passwordAgain">Password Again (min 6 characters)</string>
+    <string name="verifyEmailSend">Verification email sent</string>
+    <string name="checkInfo">Check your information</string>
+    <string name="Error">An unexpected error has occurred</string>
+    <string name="ok">OK</string>
+    <string name="password2">Password</string>
+    <string name="notYetVerifyEmail">You cannot log in because you have not yet verified your email</string>
+    <string name="notYetAccount">Don\'t have an account yet? Register</string>
+</resources>

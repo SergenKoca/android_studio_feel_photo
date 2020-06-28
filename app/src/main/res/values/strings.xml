@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FeelPhoto</string>
+    <string name="password">Şifre (min. 6 karakter)</string>
+    <string name="password2">Şifre</string>
+    <string name="email">Eposta</string>
+    <string name="signUp">Kayıt Ol</string>
+    <string name="signIn">Giriş Yap</string>
+    <string name="username">Kullanıcı Adı</string>
+    <string name="passwordAgain">Şifre Tekrar (min. 6 karakter)</string>
+    <string name="verifyEmailSend">Doğrulama epostası gönderildi</string>
+    <string name="checkInfo">Bilgilerinizi kontrol edin</string>
+    <string name="Error">Beklenmeyen bir hata meydana geldi</string>
+    <string name="ok">Tamam</string>
+    <string name="notYetVerifyEmail">Epostanızı henüz doğrulamadığınız için giriş yapamazsınız</string>
+    <string name="notYetAccount">Henüz hesabınız yok mu? Kayıt Olun</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="profile">Profil</string>
+    <string name="discover">Keşfet</string>
+    <string name="settings">Ayarlar</string>
+</resources>

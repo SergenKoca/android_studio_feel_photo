@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignInActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/def4"
+              android:scaleType="centerCrop"></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gerçek duygular habersiz çekilen fotoğraflardadır"
+                android:gravity="center"
+                android:textColor="#5A5656"
+                android:fontFamily="casual"></TextView>
+
+            <EditText
+                android:id="@+id/signInAc_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:maxLength="50"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"></EditText>
+            <EditText
+                android:id="@+id/signInAc_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password2"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:layout_marginTop="5dp"
+                android:maxLength="50"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="5dp"></EditText>
+            <TextView
+                android:id="@+id/signInAc_forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Şifremi Unuttum"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"></TextView>
+            <Button
+                android:id="@+id/signInAc_signInBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signIn"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@color/colorAccent"></Button>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/signInAc_notYetAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notYetAccount"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000"></TextView>
+
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:text="Gerçek duygular habersiz çekilen fotoğraflardadır"
+        android:background="#CCFFFFFF"></TextView>-->
+
+</RelativeLayout>
