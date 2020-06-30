@@ -62,6 +62,7 @@ public class ShowPhotosActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        feelImageArrayList.clear();
         getPhotos();
     }
 
