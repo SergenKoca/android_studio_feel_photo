@@ -7,7 +7,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.app.NotificationCompat;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +18,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,6 +79,8 @@ public class DiscoverActivity extends AppCompatActivity {
     Button like,close;
     ImageView photo;
     String current_user_key=null;
+    NotificationManager notifManager;
+    public static boolean NOTIFI_STATE = true;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -168,8 +174,13 @@ public class DiscoverActivity extends AppCompatActivity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                feelImageList.clear();
-                pickImage();
+                if(NOTIFI_STATE == true){
+                    feelImageList.clear();
+                    pickImage();
+                }
+                else{
+                    Toast.makeText(DiscoverActivity.this, "Fotoğrafın Yüklenmesini Bekleyin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -428,6 +439,7 @@ public class DiscoverActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri file, final String tags){
+        NOTIFI_STATE = false;
         Toast.makeText(DiscoverActivity.this,"Fotoğraf yükleme durumu birazdan bildirilecek",Toast.LENGTH_SHORT).show();
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         final StorageReference storageReference = FirebaseStorage.getInstance().getReference("images").child(firebaseAuth.getUid());
@@ -447,14 +459,7 @@ public class DiscoverActivity extends AppCompatActivity {
                                 //Toast.makeText(DiscoverActivity.this,"Yükleme Başarılı",Toast.LENGTH_SHORT).show();
 
                                 // bildirim ekle
-                                NotificationCompat.Builder mBuilder =
-                                        new NotificationCompat.Builder(DiscoverActivity.this)
-                                                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                                                .setContentTitle("Feel Photo")
-                                                .setContentText("Fotoğraf başarıyla yüklendi.");
-                                mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-                                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                                notificationManager.notify(1, mBuilder.build());
+                                CreateNotification(false);
 
                             }
                         });
@@ -466,16 +471,94 @@ public class DiscoverActivity extends AppCompatActivity {
                         // Handle unsuccessful uploads
                         // ...
                         // bildirim ekle
-                        NotificationCompat.Builder mBuilder =
-                                new NotificationCompat.Builder(DiscoverActivity.this)
-                                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                                        .setContentTitle("Feel Photo")
-                                        .setContentText("Fotoğraf yüklenirken bir hata meydana geldi.Tekrar deneyin.");
-                        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        notificationManager.notify(1, mBuilder.build());
+                        CreateNotification(true);
                     }
                 });
+    }
+
+    private void CreateNotification(boolean err){
+        if(err==false){
+            final int NOTIFY_ID = 0; // ID of notification
+            String id = "1";
+            String title = "Feel Photo";
+            NotificationCompat.Builder builder;
+            if (notifManager == null) {
+                notifManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel mChannel = notifManager.getNotificationChannel(id);
+                if (mChannel == null) {
+                    mChannel = new NotificationChannel(id, title, importance);
+                    mChannel.enableVibration(true);
+                    mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                    notifManager.createNotificationChannel(mChannel);
+                }
+                builder = new NotificationCompat.Builder(getApplicationContext(), id);
+                builder.setContentTitle("Fotoğraf Başarıyla Yüklendi")
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                        .setContentText(getApplicationContext().getString(R.string.app_name))
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setAutoCancel(true)
+                        //.setTicker(aMessage)
+                        .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            }
+            else {
+                builder = new NotificationCompat.Builder(getApplicationContext(), id);
+                builder.setContentTitle("Fotoğraf Başarıyla Yüklendi")
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                        .setContentText(getApplicationContext().getString(R.string.app_name))
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setAutoCancel(true)
+                        //.setTicker(aMessage)
+                        .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
+                        .setPriority(Notification.PRIORITY_HIGH);
+            }
+            Notification notification = builder.build();
+            notifManager.notify(NOTIFY_ID, notification);
+            NOTIFI_STATE = true;
+        }
+        else{
+            final int NOTIFY_ID = 0; // ID of notification
+            String id = "1";
+            String title = "Feel Photo";
+            NotificationCompat.Builder builder;
+            if (notifManager == null) {
+                notifManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel mChannel = notifManager.getNotificationChannel(id);
+                if (mChannel == null) {
+                    mChannel = new NotificationChannel(id, title, importance);
+                    mChannel.enableVibration(true);
+                    mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                    notifManager.createNotificationChannel(mChannel);
+                }
+                builder = new NotificationCompat.Builder(getApplicationContext(), id);
+                builder.setContentTitle("Fotoğraf Yükleme Başarısız")
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                        .setContentText(getApplicationContext().getString(R.string.app_name))
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setAutoCancel(true)
+                        .setTicker("Fotoğraf yüklenirken bir hata meydana geldi. Tekrar Deneyin.")
+                        .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            }
+            else {
+                builder = new NotificationCompat.Builder(getApplicationContext(), id);
+                builder.setContentTitle("Fotoğraf Yükleme Başarısız")
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                        .setContentText(getApplicationContext().getString(R.string.app_name))
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setAutoCancel(true)
+                        .setTicker("Fotoğraf yüklenirken bir hata meydana geldi. Tekrar Deneyin.")
+                        .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
+                        .setPriority(Notification.PRIORITY_HIGH);
+            }
+            Notification notification = builder.build();
+            notifManager.notify(NOTIFY_ID, notification);
+            NOTIFI_STATE = true;
+        }
     }
 
     private void searchPhoto(final String s){
