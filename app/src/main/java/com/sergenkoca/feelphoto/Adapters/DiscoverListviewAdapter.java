@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sergenkoca.feelphoto.Models.FeelImage;
 import com.sergenkoca.feelphoto.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,7 @@ public class DiscoverListviewAdapter extends BaseAdapter {
         ImageView image = (ImageView) customView.findViewById(R.id.discoverListview_image);
         TextView likeCount = (TextView) customView.findViewById(R.id.discoverListview_likeCount);
 
+        //Picasso.get().load(feelImages.get(i).getUrl()).into(image);
         Glide.with(context).load(feelImages.get(i).getUrl()).into(image);
         likeCount.setText(feelImages.get(i).getDisplayCount()+" görüntülenme");
 

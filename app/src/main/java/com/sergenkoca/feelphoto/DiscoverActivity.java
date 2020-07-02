@@ -63,6 +63,7 @@ import com.sergenkoca.feelphoto.OtherUser.OtherProfileActivity;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DiscoverActivity extends AppCompatActivity {
@@ -442,7 +443,7 @@ public class DiscoverActivity extends AppCompatActivity {
         NOTIFI_STATE = false;
         Toast.makeText(DiscoverActivity.this,"Fotoğraf yükleme durumu birazdan bildirilecek",Toast.LENGTH_SHORT).show();
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        final StorageReference storageReference = FirebaseStorage.getInstance().getReference("images").child(firebaseAuth.getUid());
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReference("images").child(firebaseAuth.getUid()).child(System.currentTimeMillis()+"");
         storageReference.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
